@@ -1,6 +1,6 @@
 # Cars API
 
-Example Cars API supports CRUD operations on a in-memory Cars datastore. Datastore is initialized with 3 default cars and allows you to explore the API via HATEAOS and OpenAPI.
+Example Cars API supports CRUD operations on a in-memory Cars datastore. Datastore is initialized with 2 default cars and allows you to explore the API via HATEAOS and OpenAPI.
 
 ## Usage
 
@@ -12,9 +12,10 @@ Example Cars API supports CRUD operations on a in-memory Cars datastore. Datasto
 _Prerequisites: Git, Node 8.x, NPM 5.x_
 
 1. `git clone https://github.com/lostthetrail/icca.git`
-2. `npm install`
-3. `npm start`
-4. Browse to http://localhost:8081/documentation
+2. `cd carpi`
+3. `npm install`
+4. `npm start`
+5. Browse to http://localhost:8081/documentation
 
 ## Use Case
 ~~~

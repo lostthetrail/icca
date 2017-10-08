@@ -1,10 +1,7 @@
 'use strict';
 
-const Joi = require('joi');
 const Handlers = require('./handlers');
 const Schemas = require('./schemas');
-
-const IdSchema = Joi.reach(Schemas.car, 'id');
 
 /**
  * List of routes supported by the server.
@@ -18,7 +15,7 @@ module.exports = [
         handler: Handlers.list,
         config: {
             description: 'Read the list of car entries.',
-            notes: 'Returns a 200 array of Car objects if successful.',
+            notes: 'Success(200) - JSON array of Cars',
             tags: ['api', 'cars'],
             validate: {}
         }
@@ -29,11 +26,11 @@ module.exports = [
         handler: Handlers.read,
         config: {
             description: 'Read a car entry.',
-            notes: 'Returns a 200 Car object if successful.',
+            notes: 'Success(200) - JSON object of a Car',
             tags: ['api', 'cars'],
             validate: {
                 params: {
-                    id: IdSchema
+                    id: Schemas.id
                 }
             }
         }
@@ -44,7 +41,7 @@ module.exports = [
         handler: Handlers.create,
         config: {
             description: 'Create a new car entry.',
-            notes: 'Returns an empty body 201 if successful.',
+            notes: 'Success(201) - JSON object of a newly created Car',
             tags: ['api', 'cars'],
             validate: {
                 payload: Schemas.car
@@ -56,11 +53,13 @@ module.exports = [
         handler: Handlers.update,
         config: {
             description: 'Update a car entry.',
-            notes: 'Returns an empty body 204 if successful.',
+            notes: `Success: 200 - JSON object of updated Car\n
+            Not Found: 404 - No body`,
+            notes: 'Success(200) - JSON object of the updated Car. Not Found(404) - No body',
             tags: ['api', 'cars'],
             validate: {
                 params: {
-                    id: IdSchema
+                    id: Schemas.id
                 },
                 payload: Schemas.car
             }
@@ -71,11 +70,11 @@ module.exports = [
         handler: Handlers.delete,
         config: {
             description: 'Delete a car entry.',
-            notes: 'Returns an empty body 204 if successful.',
+            notes: 'Success(200) - JSON object of the deleted Car. Not Found(404) - No body',
             tags: ['api', 'cars'],
             validate: {
                 params: {
-                    id: IdSchema
+                    id: Schemas.id
                 }
             }
         }

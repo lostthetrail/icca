@@ -9,21 +9,21 @@ const Store = require('./store');
  */
 
 module.exports = {
-    async list (request, reply) {
-        
-        return reply(await Store.read());
+    list(request, reply) {
+
+        return reply(Store.read());
     },
 
-    async create(request, reply) {
+    create(request, reply) {
 
-        await Store.create(request.payload);
+        const createdCar = Store.create(request.payload);
 
-        return reply().code(201);
+        return reply(createdCar).code(201);
     },
 
-    async read(request, reply) {
+    read(request, reply) {
 
-        const car = await Store.read(request.params.id);
+        const car = Store.read(request.params.id);
 
         if (!car) {
             return reply(Boom.notFound(`Unable to find Car ID: ${request.params.id}`));
@@ -32,25 +32,25 @@ module.exports = {
         return reply(car);
     },
 
-    async update(request, reply) {
+    update(request, reply) {
 
-        const updatedCarId = await Store.update(request.params.id, request.payload);
+        const updatedCar = Store.update(request.params.id, request.payload);
 
-        if (!updatedCarId) {
+        if (!updatedCar) {
             return reply(Boom.notFound(`Unable to update Car ID: ${request.params.id}`));
         }
 
-        return reply();
+        return reply(updatedCar);
     },
 
-    async delete(request, reply) {
+    delete(request, reply) {
 
-        const deletedCarId = await Store.delete(request.params.id);
+        const deletedCar = Store.delete(request.params.id);
 
-        if (!deletedCarId) {
+        if (!deletedCar) {
             return reply(Boom.notFound(`Unable to delete Car ID: ${request.params.id}`));
         }
 
-        return reply();
+        return reply(deletedCar);
     }
 };

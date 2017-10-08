@@ -5,32 +5,33 @@
  * Could be easily replaced with a SQL, disk or noSQL solution.
  */
 
-// FIXME Confirm ID is unique and can't be duplicated
-// FIXME Should ID be ignored in created/updated payloads?
-// FIXME Write unit tests
-
 const store = {
     cars: [
         {
-            id: 1,
-            color: 'Red',
-            make: 'Ford',
-            model: 'Silverado',
-            year: 2017
+            color: 'red',
+            make: 'ford',
+            model: 'silverado',
+            year: 2017,
+            id: 1
         },
         {
-            id: 2,
-            color: 'Blue',
-            make: 'Chevy',
-            model: 'Camero',
-            year: 2014
+            color: 'blue',
+            make: 'chevy',
+            model: 'camero',
+            year: 2014,
+            id: 2
         }
     ]
 };
 
-const findCarIndex = (id) => {
+const findNextId = (cars) => {
 
-    const index = store.cars.findIndex((car) => {
+    return Math.max.apply(Math, cars.map((car) => car.id)) + 1;
+};
+
+const findCarIndex = (cars, id) => {
+
+    const index = cars.findIndex((car) => {
 
         return car.id === id;
     });
@@ -43,31 +44,43 @@ const findCarIndex = (id) => {
 };
 
 module.exports = {
-    async create(car) {
+    create(car) {
 
-        const index = store.cars.push(car);
-        return car.id;
+        const id = findNextId(store.cars);
+        const newCar = Object.assign({}, car, { id });
+
+        store.cars.push(newCar);
+        return newCar;
     },
 
-    async read(id) {
+    read(id) {
 
         if (!id) {
             return store.cars;
         }
-        return store.cars[findCarIndex(id)];
+        return store.cars[findCarIndex(store.cars, id)];
     },
 
-    async update(id, car) {
+    update(id, car) {
 
-        const index = findCarIndex(id);
-        store.cars.splice(index, 1, car);
-        return id;
+        const index = findCarIndex(store.cars, id);
+        if (!index) {
+            return null;
+        }
+
+        const updatedCar = Object.assign({}, car, { id });
+
+        store.cars.splice(index, 1, updatedCar);
+        return updatedCar;
     },
 
-    async delete(id) {
+    delete(id) {
 
-        const index = findCarIndex(id);
-        store.cars.splice(index, 1);
-        return id;
+        const index = findCarIndex(store.cars, id);
+        if (!index) {
+            return null;
+        }
+        const delCar = store.cars.splice(index, 1);
+        return delCar[0];
     }
 };
