@@ -1,0 +1,32 @@
+{
+  "name": "chessercise",
+  "version": "1.0.0",
+  "description": "Chess game",
+  "main": "cli.js",
+  "scripts": {
+    "test": "tape **/*.test.js",
+    "coverage": "istanbul cover tape **/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lostthetrail/icca.git"
+  },
+  "keywords": [
+    "chess",
+    "game"
+  ],
+  "author": "Mark Reynolds",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lostthetrail/icca/issues"
+  },
+  "homepage": "https://github.com/lostthetrail/icca#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "tape": "^4.8.0"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "yargs": "^9.0.1"
+  }
+}
