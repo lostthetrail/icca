@@ -1,6 +1,6 @@
 # Cars API
 
-Example Cars API supports CRUD operations on a in-memory Cars datastore. Datastore is initialized with 2 default cars and allows you to explore the API via HATEAOS and OpenAPI.
+Example Cars API supports CRUD operations on a in-memory Cars datastore. Datastore is initialized with 2 default cars and allows you to explore the API via Swagger(OpenAPI).
 
 ## Usage
 
