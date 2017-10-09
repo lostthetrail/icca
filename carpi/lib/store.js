@@ -58,18 +58,23 @@ module.exports = {
         if (!id) {
             return store.cars;
         }
+
+        const index = findCarIndex(store.cars, id);
+        if (index === null) {
+            return null;
+        }
+
         return store.cars[findCarIndex(store.cars, id)];
     },
 
     update(id, car) {
 
         const index = findCarIndex(store.cars, id);
-        if (!index) {
+        if (index === null) {
             return null;
         }
 
         const updatedCar = Object.assign({}, car, { id });
-
         store.cars.splice(index, 1, updatedCar);
         return updatedCar;
     },
@@ -77,7 +82,7 @@ module.exports = {
     delete(id) {
 
         const index = findCarIndex(store.cars, id);
-        if (!index) {
+        if (index === null) {
             return null;
         }
         const delCar = store.cars.splice(index, 1);
